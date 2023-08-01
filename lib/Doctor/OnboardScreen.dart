@@ -30,6 +30,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                   _currentPage = page;
                 });
               },
+
               children: [
                 buildOnBoardScreen(
                     'images/walkthrough.svg', 'Grow your online Presence'),
