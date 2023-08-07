@@ -3,6 +3,7 @@ import 'package:ehealthcare/Doctor/Create%20Profile/ClinicInfo_timing.dart';
 import 'package:ehealthcare/Doctor/Create%20Profile/Seesion_Timings.dart';
 import 'package:ehealthcare/Doctor/SplashScreen.dart';
 import 'package:ehealthcare/profile.dart';
+import 'package:ehealthcare/sds.dart';
 
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen()
+      home: viewjk()
     );
   }
 
