@@ -1,9 +1,11 @@
-import 'package:ehealthcare/Doctor/Create%20Profile/CreateProfile.dart';
-import 'package:ehealthcare/Doctor/Home.dart';
 import 'package:flutter/material.dart';
 
+import '../Create Profile/CreateProfile.dart';
+
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+  String email;
+  String password;
+   WelcomeScreen({Key? key,required this.email ,required this.password}) : super(key: key);
 
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
@@ -139,10 +141,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 width: 300,
                 child: ElevatedButton(
                   onPressed: () {
+                    print(widget.email);
+                    print(widget.password);
+
+
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => CreateProfile()));
+                            builder: (context) => CreateProfile(email: widget.email,password: widget.password,)));
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Color.fromRGBO(36, 107, 253, 1),

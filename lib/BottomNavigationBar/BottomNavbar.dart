@@ -1,11 +1,10 @@
-
-import 'package:ehealthcare/Doctor/Home.dart';
+import 'package:ehealthcare/BottomNavigationBar/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../Notifications.dart';
-import '../profile.dart';
 import 'Appointments/Appointments.dart';
+import 'Notifications.dart';
+import 'Home/Home.dart';
 
 void main() {
   runApp(MyApp());
@@ -45,7 +44,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
       bottomNavigationBar: Container(
         height: 65,
         width: 375,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
               Color.fromRGBO(36, 107, 253, 1),

@@ -62,7 +62,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
               );
             }),
           if (_currentPage == 1)
-            buildOnBoardButton('Login', () {
+            buildOnBoardButton('SignIn', () {
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => Login()));
             }),

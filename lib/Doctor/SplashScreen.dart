@@ -1,8 +1,9 @@
+import 'package:ehealthcare/BottomNavigationBar/BottomNavbar.dart';
 import 'package:ehealthcare/Doctor/OnboardScreen.dart';
-import 'package:ehealthcare/Doctor/WalkThrough.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -18,12 +19,24 @@ class _SplashScreenState extends State<SplashScreen> {
     navigateToNextPage();
   }
 
-  void navigateToNextPage() {
+  Future<void> navigateToNextPage() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final bool loggedIn = prefs.getBool('isLoggedIn') ?? false;
     Future.delayed(Duration(seconds:3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => OnBoardScreen()), // Replace 'NextPage' with your actual next page widget
-      );
+      if(loggedIn==false) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) =>
+              OnBoardScreen()), // Replace 'NextPage' with your actual next page widget
+        );
+      }
+      else{
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) =>
+            BottomNavigationBarScreen()));
+      }
     });
   }
 
@@ -33,8 +46,8 @@ class _SplashScreenState extends State<SplashScreen> {
       body:Center(
         child: SvgPicture.asset(
           'images/logo.svg',
-          width: 290, // Specify width
-          height: 210, // Specify height
+          width: double.infinity, // Specify width
+          height: double.infinity, // Specify height
         ),
       ),
 

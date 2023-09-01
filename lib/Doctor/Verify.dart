@@ -1,17 +1,90 @@
+
+import 'dart:async';
+
 import 'package:ehealthcare/Doctor/Welcome.dart';
+import 'package:ehealthcare/utils/loader.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import '../utils/Snackbar.dart';
 import 'Login.dart';
 
+
+import 'package:flutter/cupertino.dart';
+
 class VerifyScreen extends StatefulWidget {
-  const VerifyScreen({Key? key}) : super(key: key);
+  String email;
+  String password;
+  final int otp;
+
+  VerifyScreen({Key? key, required this.otp,required this.email ,required this.password}) : super(key: key);
 
   @override
   _VerifyScreenState createState() => _VerifyScreenState();
 }
 
 class _VerifyScreenState extends State<VerifyScreen> {
+
+  TextEditingController _otpController = TextEditingController();
+
+
+
+
+   Future<void> _startLoading(BuildContext context) async {
+    // _timer?.cancel();
+
+
+     await LoaderManager.startLoading(loadingStatus: 'Verifying...').then((value) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (BuildContext context) => WelcomeScreen(email: widget.email, password: widget.password)),
+            // (Route<dynamic> route) => false,
+      );
+
+      SnackbarManager.showSnackbar(
+        title: 'Email Verification',
+        message: 'Your Email has been successfully verified',
+        context: context,
+      );
+
+    });
+
+
+    print('EasyLoading show');
+  }
+
+  String maskEmail(String email) {
+    final parts = email.split('@');
+    final username = parts[0];
+    final domain = parts[1];
+
+    final maskedUsername = username.substring(0, 1) + '*' * (username.length - 4);
+
+    return '$maskedUsername@$domain';
+  }
+
+
+
+
+  String maskedEmail='';
+
+  @override
+  void dispose() {
+
+    super.dispose();
+
+  }
+  int _secondsRemaining = 120; // 1 minute in seconds
+  @override
+  void initState() {
+    super.initState();
+    maskedEmail = maskEmail(widget.email);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,22 +103,19 @@ class _VerifyScreenState extends State<VerifyScreen> {
                     icon: Icon(Icons.arrow_back, color: Colors.black, size: 22),
                     onPressed: () {
                       // Navigate to the login screen
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Login()),
-                      );
+                     Navigator.pop(context);
                     },
                   ),
                   SizedBox(
                     width: 5,
                   ),
                   Text(
-                    'Phone Number Verification',
+                    'Email Verification',
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
-                    height: 10,
-                    width: 10,
+                    height: 50,
+                    width: 50,
                   )
                 ],
               ),
@@ -57,14 +127,15 @@ class _VerifyScreenState extends State<VerifyScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'The code has been sent to',
+                  'The code has been sent to ',
                   style: TextStyle(fontSize: 14),
                 ),
                 SizedBox(
                   width: 1,
                 ),
                 Text(
-                  '+92323847****23',
+                  // 'ruyt',
+                  maskedEmail,
                   style: TextStyle(fontSize: 14),
                 ),
               ],
@@ -81,6 +152,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                   0,
                 ),
                 child: PinCodeTextField(
+                  controller: _otpController,
                   keyboardType: TextInputType.number,
                   appContext: context,
                   length: 4,
@@ -123,7 +195,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                     width: 3,
                   ),
                   Text(
-                    '55',
+                  ' $_secondsRemaining',
                     style: TextStyle(
                         fontSize: 16, color: Color.fromRGBO(36, 107, 252, 1)),
                   ),
@@ -142,11 +214,20 @@ class _VerifyScreenState extends State<VerifyScreen> {
               width: 300,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => WelcomeScreen()),
-                    (route) => false,
-                  );
+                  if (_otpController.text == widget.otp.toString()) {
+                    print("Entered OTP: " + _otpController.text);
+                    print("Expected OTP: " + widget.otp.toString());
+
+                    _startLoading(context);
+                  }
+                  else{
+                    SnackbarManager.showSnackbar(
+                      title: 'Email Verification',
+                      message: 'Invalid Pincode. Try Again!',
+                      context: context,
+                    );
+
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Color.fromRGBO(36, 107, 253, 1),

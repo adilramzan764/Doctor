@@ -1,13 +1,13 @@
 
 import 'dart:async';
 
-import 'package:ehealthcare/Doctor/Appointments/Completed.dart';
-import 'package:ehealthcare/Doctor/Appointments/Requests.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'Cancelled.dart';
+import 'Completed.dart';
+import 'Requests.dart';
 
 
 class Appointments extends StatefulWidget {

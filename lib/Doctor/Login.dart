@@ -1,9 +1,13 @@
-import 'package:ehealthcare/Doctor/Create%20Profile/CreateProfile.dart';
+import 'dart:math';
+
 import 'package:ehealthcare/Doctor/LoginWithEmail.dart';
 import 'package:ehealthcare/Doctor/Verify.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:country_code_picker/country_code_picker.dart';
+
+import '../Create Profile/SignUp.dart';
+
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -24,6 +28,14 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+  int _generateRandomOTP(int length) {
+    final random = Random();
+    final max = pow(10, length).toInt();
+    return random.nextInt(max);
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -170,10 +182,12 @@ class _LoginState extends State<Login> {
                   ),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => VerifyScreen()));                },
+                      // int otp = _generateRandomOTP(4);
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => VerifyScreen(otp: otp,email: '2',password: '123',)));
+                      },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.transparent,
                       elevation: 0,
@@ -182,15 +196,55 @@ class _LoginState extends State<Login> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
-                        'LOGIN',
+                        'SignIn',
                         style: TextStyle(
                           color: Colors.white,
                         ),
                       ),
                     ),
                   ),
+                ),
+              ),
+              SizedBox(height: 20),
+
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 12, 0),
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child:  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Do not have an account? ',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.black,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SignUp(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'SignUp',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromRGBO(36, 107, 253, 1),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+
+
                 ),
               ),
               SizedBox(height: 30)

@@ -1,32 +1,33 @@
-import 'package:ehealthcare/Doctor/Create%20Profile/CreateProfileScreenThree.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../BottomNavbar.dart';
+import '../../BottomNavigationBar/BottomNavbar.dart';
 import 'CreateProfile.dart';
+import 'CreateProfileScreenThree.dart';
 
 class CreateProfileScreenTwo extends StatefulWidget {
-  const CreateProfileScreenTwo({Key? key}) : super(key: key);
+  bool clinicChecked;
+   CreateProfileScreenTwo({Key? key,required this.clinicChecked}) : super(key: key);
 
   @override
   _CreateProfileScreenTwoState createState() => _CreateProfileScreenTwoState();
 }
 
 class _CreateProfileScreenTwoState extends State<CreateProfileScreenTwo> {
-  bool isChecked1 = false;
+  bool isChecked1 = true;
   bool isChecked2 = false;
 
-  void _toggleCheckbox1() {
-    setState(() {
-      isChecked1 = !isChecked1;
-    });
-  }
+  // void _toggleCheckbox1() {
+  //   setState(() {
+  //     isChecked1 = !isChecked1;
+  //   });
+  // }
 
-  void _toggleCheckbox2() {
-    setState(() {
-      isChecked2 = !isChecked2;
-    });
-  }
+  // void _toggleCheckbox2() {
+  //   setState(() {
+  //     isChecked2 = !isChecked2;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -69,27 +70,24 @@ class _CreateProfileScreenTwoState extends State<CreateProfileScreenTwo> {
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Row(
               children: [
-                InkWell(
-                  onTap: _toggleCheckbox1,
-                  child: Container(
-                    width: 24,
-                    height: 24,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        width: 2.0,
-                        color: isChecked1 ? Colors.black : Colors.grey,
-                      ),
-                      color: isChecked1 ? Colors.black : Colors.transparent,
+                Container(
+                  width: 24,
+                  height: 24,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      width: 2.0,
+                      color: isChecked1 ? Colors.black : Colors.grey,
                     ),
-                    child: isChecked1
-                        ? Icon(
-                            Icons.check,
-                            size: 16.0,
-                            color: Colors.white,
-                          )
-                        : null,
+                    color: isChecked1 ? Colors.black : Colors.transparent,
                   ),
+                  child: isChecked1
+                      ? Icon(
+                          Icons.check,
+                          size: 16.0,
+                          color: Colors.white,
+                        )
+                      : null,
                 ),
                 SizedBox(
                   width: 15,
@@ -116,10 +114,10 @@ class _CreateProfileScreenTwoState extends State<CreateProfileScreenTwo> {
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CreateProfile()));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => CreateProfile()));
                       },
                       child: Text(
                         'Edit',
@@ -140,7 +138,7 @@ class _CreateProfileScreenTwoState extends State<CreateProfileScreenTwo> {
             child: Row(
               children: [
                 InkWell(
-                  onTap: _toggleCheckbox2,
+                  // onTap: _toggleCheckbox2,
                   child: Container(
                     width: 24,
                     height: 24,
@@ -148,11 +146,11 @@ class _CreateProfileScreenTwoState extends State<CreateProfileScreenTwo> {
                       shape: BoxShape.circle,
                       border: Border.all(
                         width: 2.0,
-                        color: isChecked2 ? Colors.black : Colors.grey,
+                        color: widget.clinicChecked ? Colors.black : Colors.grey,
                       ),
-                      color: isChecked2 ? Colors.black : Colors.transparent,
+                      color: widget.clinicChecked ? Colors.black : Colors.transparent,
                     ),
-                    child: isChecked2
+                    child: widget.clinicChecked
                         ? Icon(
                             Icons.check,
                             size: 16.0,
@@ -208,7 +206,7 @@ class _CreateProfileScreenTwoState extends State<CreateProfileScreenTwo> {
             child: Container(
               height: 50,
               width: 300,
-              decoration: isChecked2 && isChecked1
+              decoration: widget.clinicChecked && isChecked1
                   ? BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
@@ -226,6 +224,7 @@ class _CreateProfileScreenTwoState extends State<CreateProfileScreenTwo> {
                     ),
               child: ElevatedButton(
                 onPressed: () {
+                  if(isChecked1==true && widget.clinicChecked==true)
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(

@@ -1,8 +1,10 @@
-import 'package:ehealthcare/Doctor/Create%20Profile/ClinicInfo_timing.dart';
-import 'package:ehealthcare/Doctor/Create%20Profile/Seesion_Timings.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'ClinicInfo_timing.dart';
+import 'Seesion_Timings.dart';
 
 class Clinic_Info extends StatefulWidget {
   const Clinic_Info({Key? key}) : super(key: key);

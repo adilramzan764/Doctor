@@ -1,28 +1,42 @@
-
-import 'package:ehealthcare/Doctor/Create%20Profile/ClinicInfo_timing.dart';
-import 'package:ehealthcare/Doctor/Create%20Profile/Seesion_Timings.dart';
+import 'package:ehealthcare/BottomNavigationBar/BottomNavbar.dart';
 import 'package:ehealthcare/Doctor/SplashScreen.dart';
-import 'package:ehealthcare/profile.dart';
-import 'package:ehealthcare/sds.dart';
-
 import 'package:flutter/material.dart';
-
-import 'Image_Picker.dart';
-import 'Notifications.dart';
-
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+
   runApp(MyApp());
+  configLoading();
+
+}
+
+void configLoading() {
+  EasyLoading.instance
+    ..displayDuration = const Duration(milliseconds: 2000)
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    ..loadingStyle = EasyLoadingStyle.light
+    ..indicatorSize = 45.0
+    ..radius = 10.0
+    ..progressColor = Colors.yellow
+    ..backgroundColor = Colors.green
+    ..indicatorColor = Colors.orange
+    ..textColor = Colors.yellow
+    ..maskColor = Colors.blue.withOpacity(0.5)
+    ..userInteractions = true
+    ..dismissOnTap = true;
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: viewjk()
+      home:  SplashScreen(),
+      builder: EasyLoading.init(),
     );
   }
-
-
 }

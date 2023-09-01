@@ -1,8 +1,7 @@
-import 'package:ehealthcare/Doctor/Create%20Profile/CreateProfile.dart';
-import 'package:ehealthcare/Doctor/Create%20Profile/Seesion_Timings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../Create Profile/Seesion_Timings.dart';
 import 'Notification.dart';
 
 class Settings extends StatefulWidget {
@@ -21,7 +20,7 @@ class _SettingsState extends State<Settings> {
     'Rate us on Playstore',
     'Support',
     'FAQs',
-
+    'Logout'
   ];
 
   @override
@@ -45,8 +44,8 @@ class _SettingsState extends State<Settings> {
                       color: Colors.black,
                     ),
                     onPressed: () {
-                      Navigator.pop(
-                          context);},
+                      Navigator.pop(context);
+                    },
                     iconSize: 24,
                   ),
                 ),
@@ -63,65 +62,66 @@ class _SettingsState extends State<Settings> {
           ),
           Expanded(
             child: Container(
-
               padding: EdgeInsets.all(8.0),
               child: ListView.builder(
                 itemCount: texts.length,
                 itemBuilder: (context, index) {
-                  print(texts[index]);
+                  var customColor = texts[index] == 'Logout' ? Colors.red : Colors.black;
 
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                      child: SizedBox(
-                        height: 40,
-                        child: ElevatedButton(
-
-                            style: const ButtonStyle(
-                                backgroundColor: MaterialStatePropertyAll(Colors.white)
-                            ),
-                            onPressed: () {
-                              if(texts[index]=='Notifications')
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => MyNotification()),
-                              );
-                              if(texts[index]=='Edit Timing')
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => Session_Timings()),
-                                );
-                              if(texts[index]=='Edit Profile')
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => CreateProfile()),
-                                );
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 8.0,bottom: 8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  SizedBox(height: 8.0,),
-                                  Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(texts[index],style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.black),)),
-                                  Expanded(
-                                    child: Align(alignment: Alignment.centerRight,
-                                        child:
-                                         Icon(CupertinoIcons.right_chevron,color: Colors.black,size: 20,)
-                                    ),
-                                  )
-                                ],
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    child: SizedBox(
+                      height: 40,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.white),
+                        ),
+                        onPressed: () {
+                          if (texts[index] == 'Notifications') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => MyNotification()),
+                            );
+                          }
+                          if (texts[index] == 'Edit Timing') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Session_Timings()),
+                            );
+                          }
+                          // if (texts[index] == 'Edit Profile') {
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(builder: (context) => CreateProfile()),
+                          //   );
+                          // }
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(height: 8.0,),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(texts[index], style: TextStyle(fontWeight: FontWeight.bold, color: customColor)),
                               ),
-                            )),
+                              Expanded(
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Icon(CupertinoIcons.right_chevron, color: customColor, size: 20),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
                       ),
-                    );
-
+                    ),
+                  );
                 },
               ),
             ),
           ),
-
         ],
       ),
     );

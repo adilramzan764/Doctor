@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../Models/Appointments.dart';
+
 class Session_Timings extends StatefulWidget {
   const Session_Timings({Key? key}) : super(key: key);
 
@@ -11,21 +13,7 @@ class Session_Timings extends StatefulWidget {
 class _Session_TimingsState extends State<Session_Timings> {
   bool isSwitched3 = false;
 
-  // Map<String, TimeOfDay?> sessionTimings = {};
-  // TimeOfDay? sessionTimings;
-  //
-  // void _selectTime(String day) async {
-  //   final TimeOfDay? picked = await showTimePicker(
-  //     context: context,
-  //     initialTime: TimeOfDay.now(),
-  //   );
-  //
-  //   if (picked != null) {
-  //     setState(() {
-  //       sessionTimings = picked;
-  //     });
-  //   }
-  // }
+
 
   final List<String> days = [
     "Mon",
@@ -297,9 +285,13 @@ class _Session_TimingsState extends State<Session_Timings> {
                 ),
                 child: TextButton(
                   onPressed: () {
+
+
                     Navigator.pop(
-                      context
+                      context , appointments
                     );
+                    print(appointments);
+                    print("object");
                   },
                   //
                   child: Text(

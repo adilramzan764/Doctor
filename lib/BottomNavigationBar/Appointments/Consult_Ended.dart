@@ -1,8 +1,9 @@
 
-import 'package:ehealthcare/Doctor/Appointments/Prescription.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'Prescription.dart';
 
 class VideoConsult2 extends StatefulWidget {
   const VideoConsult2({Key? key}) : super(key: key);
